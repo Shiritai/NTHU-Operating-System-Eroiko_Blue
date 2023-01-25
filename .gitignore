@@ -1,0 +1,14 @@
+*.o
+*.log
+.vscode
+c++example
+coff2noff
+.DS_Store
+mips-decstation.linux*
+MP1/NachOS-4.0_MP1/usr
+MP2/NachOS-4.0_MP2/usr
+MP3/NachOS-4.0_MP3/usr
+MP4/NachOS-4.0_MP4/usr
+nachos
+tmp
+script

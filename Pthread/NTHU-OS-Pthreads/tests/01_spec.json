@@ -1,0 +1,89 @@
+{
+	"n": 4000,
+	"input": "./tests/01.in",
+	"output": "./tests/01.out",
+	"auto_gen_transformer": {
+		"annotation": {
+			"A": "same speed",
+			"B": "consumer faster than producer",
+			"C": "producer faster than consumer",
+			"D": "producer slightly faster than consumer",
+			"E": "consumer slightly faster than producer"
+		},
+		"producer": {
+			"A": {
+				"a": 2003,
+				"b": 183492,
+				"m": 1000000007,
+				"iterations": 9000000
+			},
+			"B": {
+				"a": 2143,
+				"b": 191324,
+				"m": 1000000009,
+				"iterations": 12000000
+			},
+			"C": {
+				"a": 2089,
+				"b": 923134,
+				"m": 1000000021,
+				"iterations": 5000000
+			},
+			"D": {
+				"a": 2677,
+				"b": 912834,
+				"m": 1000000033,
+				"iterations": 7000000
+			},
+			"E": {
+				"a": 2693,
+				"b": 718341,
+				"m": 1000000087,
+				"iterations": 12000000
+			}
+		},
+		"consumer": {
+			"A": {
+				"a": 2729,
+				"b": 713423,
+				"m": 1000000093,
+				"iterations": 9000000
+			},
+			"B": {
+				"a": 2617,
+				"b": 193424,
+				"m": 1000000097,
+				"iterations": 5000000
+			},
+			"C": {
+				"a": 2053,
+				"b": 743142,
+				"m": 1000000103,
+				"iterations": 12000000
+			},
+			"D": {
+				"a": 2347,
+				"b": 617345,
+				"m": 1000000123,
+				"iterations": 12000000
+			},
+			"E": {
+				"a": 2521,
+				"b": 4719832,
+				"m": 1000000181,
+				"iterations": 7000000
+			}
+		}
+	},
+	"auto_gen_input": {
+		"low": 0,
+		"high": 1061109567,
+		"choices": {
+			"800": ["C", "D"],
+			"1600": ["B", "E"],
+			"2400": ["C", "D"],
+			"3200": ["B", "E"],
+			"4000": ["C", "D"]
+		}
+	}
+}

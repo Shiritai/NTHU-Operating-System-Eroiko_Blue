@@ -1,0 +1,59 @@
+{
+	"n": 200,
+	"input": "./tests/00.in",
+	"output": "./tests/00.out",
+	"auto_gen_transformer": {
+		"annotation": {
+			"A": "same speed",
+			"B": "same speed",
+			"C": "same speed"
+		},
+		"producer": {
+			"A": {
+				"a": 11,
+				"b": 1111,
+				"m": 1000000007,
+				"iterations": 10000000
+			},
+			"B": {
+				"a": 13,
+				"b": 1313,
+				"m": 1000000007,
+				"iterations": 10000000
+			},
+			"C": {
+				"a": 17,
+				"b": 1717,
+				"m": 1000000007,
+				"iterations": 10000000
+			}
+		},
+		"consumer": {
+			"A": {
+				"a": 19,
+				"b": 1919,
+				"m": 1000000007,
+				"iterations": 10000000
+			},
+			"B": {
+				"a": 23,
+				"b": 2323,
+				"m": 1000000007,
+				"iterations": 10000000
+			},
+			"C": {
+				"a": 29,
+				"b": 2929,
+				"m": 1000000007,
+				"iterations": 10000000
+			}
+		}
+	},
+	"auto_gen_input": {
+		"low": 0,
+		"high": 123456,
+		"choices": {
+			"200": ["A", "B", "C"]
+		}
+	}
+}
