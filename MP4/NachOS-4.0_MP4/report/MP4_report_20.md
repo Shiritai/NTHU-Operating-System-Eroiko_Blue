@@ -1,6 +1,6 @@
 # MP4 Report from team20
 
-> The forth assignment of NachOS
+> Forth assignment of NachOS
 >
 > Course: Operating System
 >

@@ -1,6 +1,6 @@
 # MP3 Report from team20
 
-> The third assignment of NachOS
+> Third assignment of NachOS
 >
 > Course: Operating System
 >

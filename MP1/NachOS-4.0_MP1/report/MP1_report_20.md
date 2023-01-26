@@ -1,6 +1,6 @@
 # MP1 Report from team20
 
-> The first assignment of NachOS
+> First assignment of NachOS
 >
 > Course: Operating System
 >
