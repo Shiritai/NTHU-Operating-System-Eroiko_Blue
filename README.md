@@ -1,6 +1,6 @@
 # Implementation homework of NTHU Operating System
 
-Include NachOS `MP1` ~ `MP4`, and Pthread (2022-09 ~ 2023-01).
+Include NachOS `MP1` ~ `MP4` and Pthread (2022-09 ~ 2023-01).
 
 ## 給過客們的話
 
