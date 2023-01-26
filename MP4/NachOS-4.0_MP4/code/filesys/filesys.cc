@@ -328,7 +328,9 @@ OpenFileId FileSystem::Open(const char *path)
 {
     OpenFile *openFile = OpenAsOpenFile(path);
     // maintain OpenFile table
-    OpenFileId id = opTable.size();
+    do {
+        id = rand();
+    } while (opTable.find(id) != opTable.end());
     opTable[id] = openFile;
     return id; // return NULL if not found
 }

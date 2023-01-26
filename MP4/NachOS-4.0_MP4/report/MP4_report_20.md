@@ -114,6 +114,8 @@ class FileHeader
 
 再來介紹五個 System Call 的實作, 以及其他調整。
 
+若想快速瀏覽實作的結果, 可以先看 [FileHeader 概覽](#fileheader-概覽)以及 [Directory 概覽](#directory-概覽)兩章節。
+
 ### `FileHeader` 概覽
 
 我以類似 (29 way) B tree 的方式設計 `FileHeader`。但與純粹的 B tree 抑或 Multi-level scheme 又有所不同, 是介於這兩種實作的產物。概念是將需求的檔案大小盡可能地以 `FileHeader` (大小為一個 sector) 為基礎, 對檔案大小取對數, 以此結果來長出整棵樹。結果是以樹形結構模擬 Multi-level scheme 的行為, 整顆 `FileHeader` Tree 的大小完全是動態的根據檔案大小調整, 沒有檔案大小的理論上限。
@@ -895,6 +897,36 @@ void FileHeader::Print(bool with_content, vector<bool> indent_list) {
 
 與 `FileHeader` 的行為差在 `Directory` 不在意子目錄的載入與否, 且有對資料「增刪查」的邏輯要實現。
 
+以下為執⾏ `FS_r_rr.sh` 腳本的過程印出的其中⼀次資料夾結構, 這說明我們完成 Spec part 3 的要求; 另將此腳本執⾏完即可驗證我們完成 Spec bonus 3 的要求。
+
+```txt
+Directory structure:
+├─── [D] name: mydir, first sector: 1072, ind: 0
+│     ├─── [F] name: num0.txt, first sector: 1411, ind: 0
+│     ├─── [F] name: num1.txt, first sector: 1493, ind: 1
+│     ├─── [F] name: num2.txt, first sector: 1575, ind: 2
+│     │
+│     ├─── [D] name: sub1, first sector: 1657, ind: 3
+│     │     ├─── [F] name: num.txt, first sector: 1843, i ...
+│     │     │
+│     │     ├─── [D] name: sub, first sector: 2007, ind: 1
+│     │     │     └─── [F] name: num.txt, first sector: 2 ...
+│     │     │
+│     │     └─── [D] name: tmp, first sector: 2018, ind: 2
+│     │
+│     ├─── [D] name: sub2, first sector: 1668, ind: 4
+│     │     ├─── [F] name: num.txt, first sector: 1925, i ...
+│     │     │
+│     │     └─── [D] name: tmp, first sector: 2029, ind: 1
+│     │
+│     └─── [F] name: num3.txt, first sector: 1679, ind: 5
+│
+├─── [F] name: num1.txt, first sector: 1083, ind: 1
+├─── [F] name: num2.txt, first sector: 1165, ind: 2
+├─── [F] name: num3.txt, first sector: 1247, ind: 3
+└─── [F] name: num4.txt, first sector: 1329, ind: 4
+```
+
 ### `Directory` 的設計
 
 由 Part III 所規定, 要支援子目錄的邏輯, 故我將原本增刪查的方法都新增一預設參數 `isDir`, 以在向下兼容的同時, 還支援子元素可為檔案抑或目錄的邏輯。
@@ -1263,14 +1295,16 @@ map<OpenFileId, OpenFile*> opTable; // opened file table
 
     新的 `FileSystem::OpenAsOpenFile` 取代原本的 `FileSystem::Open`, 僅對核心內可用。可以看成是新版 `FileSystem::Open` 的裏函式。
 
-    新 `OpenFileId` 的取得很 tricky, 直接以 `opTable` 大小決定, 結果與正常 Linux 下獲得的 File Descriptor 相同。
+    新 OpenFileId 的取得很簡單, 直接以亂數的結果決定, 如果沒有撞名就直接⽤, 不過也許多⼀個計數器會更好。
 
     ```c++
     OpenFileId FileSystem::Open(const char *path)
     {
         OpenFile *openFile = OpenAsOpenFile(path);
         // maintain OpenFile table
-        OpenFileId id = opTable.size();
+        do {
+            id = rand();
+        } while (opTable.find(id) != opTable.end());
         opTable[id] = openFile;
         return id; // return NULL if not found
     }
