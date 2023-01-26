@@ -1,3 +1,0 @@
-The default CPU scheduling algorithm of Nachos is a simple round-robin scheduler with
-100 ticks time quantum. The goal of this MP is to replace it with a multilevel feedback
-queue, and understand the implementation of process lifecycle management 
